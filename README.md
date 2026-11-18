@@ -1,29 +1,38 @@
 # SMS Forwarder Personal — downloads
 
-This public repository contains signed APK downloads and update metadata only. Application source and signing credentials remain private.
+Application source remains private. This repository contains signed APK downloads and public update metadata only.
 
-## Test the in-app update
+## Current release: 1.4 (6)
 
-1. Stop forwarding and uninstall the previous unstable app if you want a fresh start. This clears app settings and app history.
-2. **Install [version 1.3 (4)](https://github.com/nGgit11/SMSForwarderPersonal-Updates/releases/download/v1.3/app-release.apk) first.**
-3. Open the app, grant SMS/phone permissions and go to Settings.
-4. Confirm version **1.3 (4)**, then tap **Check for updates**.
-5. Download the offered **1.3.1 (5)**. Tap **Install downloaded update**; if Android requests permission, allow it, return and tap Install again.
-6. Confirm Android's update without uninstalling 1.3.
-7. Settings should now show **1.3.1 (5)**. Another update check should say it is current.
+[Download version 1.4](https://github.com/nGgit11/SMSForwarderPersonal-Updates/releases/download/v1.4/app-release.apk) or open the installed app's **Settings → Check for updates**.
 
-Both releases have the same verified signing identity. Version 1.3.1 intentionally keeps the forwarding behavior unchanged so the test isolates updating and preference retention.
+Update over 1.3.1 without uninstalling to retain settings and history. If Android asks for installation permission, allow it, return to the app and tap **Install downloaded update** again.
 
-## Downloads
+### What's new
 
-- [1.3 — install first for the test](https://github.com/nGgit11/SMSForwarderPersonal-Updates/releases/tag/v1.3)
-- [1.3.1 — current release](https://github.com/nGgit11/SMSForwarderPersonal-Updates/releases/tag/v1.3.1)
-- [Live update metadata](https://raw.githubusercontent.com/nGgit11/SMSForwarderPersonal-Updates/refs/heads/main/update.json)
+- Ongoing status notification for the configured active SIM routes; optional in Settings.
+- Standard joined multipart SMS by default for new messages. Numbered separate-message compatibility mode remains available.
+- Optional SMS-friendly punctuation and improved sizing diagnostics. A joined bubble can still contain multiple billable SMS segments.
+- Visible default promotional categories with individual switches, including loan/extra-cash and credit/card ads.
+- Personal literal words/phrases, one per line, with branded-only or all-sender scope.
+- Sender overrides, important-message protection, private diagnostics and failure notifications remain.
+- Database migration preserves existing queue entries. Partial or uncertain joined sends require review rather than blind retries.
 
-Each release includes its APK and a metadata file containing its SHA-256. The app checks the checksum, package, version and installed signing identity before opening Android's installer.
+Release lint and all 24 JVM unit tests pass. Device tests compile; real-phone notification, joining and carrier behavior still need testing. If a carrier/iPhone has trouble with joined messages, disable **Join long SMS** to restore compatibility sending.
 
-## Troubleshooting
+## Verification
 
-If the first check says current, check that you installed 1.3 rather than 1.3.1. If checking fails, open the metadata link on the phone to confirm connectivity. A debug build cannot accept these release-signed updates.
+The app checks APK SHA-256, package, version and the currently installed signing identity before opening Android's installer. Each release includes its own checksum metadata.
 
-After the update test, configure a trusted destination and enable forwarding to test actual SMS delivery. Carrier delivery is not guaranteed. Use the app's private diagnostic export when reporting a problem; do not share OTPs or private messages.
+[Live update metadata](https://raw.githubusercontent.com/nGgit11/SMSForwarderPersonal-Updates/refs/heads/main/update.json)
+
+## Earlier update test
+
+The 1.3 → 1.3.1 OTA flow was confirmed on the user's phone. Those downloads remain available:
+
+- [1.3 baseline](https://github.com/nGgit11/SMSForwarderPersonal-Updates/releases/tag/v1.3)
+- [1.3.1 OTA validation](https://github.com/nGgit11/SMSForwarderPersonal-Updates/releases/tag/v1.3.1)
+
+The live feed now offers 1.4. A debug build cannot accept these release-signed updates.
+
+For problems, use the app's diagnostic export. Do not share OTPs, private messages or phone numbers.
