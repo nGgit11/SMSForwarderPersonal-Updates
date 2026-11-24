@@ -2,13 +2,36 @@
 
 Application source remains private. This repository contains signed APK downloads and public update metadata only.
 
-## Current release 1.6
+## Current release 1.7
 
-[Download version 1.6](https://github.com/nGgit11/SMSForwarderPersonal-Updates/releases/download/v1.6/app-release.apk), or open the installed app's **Settings > App updates > Check for updates**. On older versions, Check for updates is directly in Settings.
+[Download version 1.7](https://github.com/nGgit11/SMSForwarderPersonal-Updates/releases/download/v1.7/app-release.apk), or open the installed app's **Settings > App updates > Check for updates**. On older versions, Check for updates is directly in Settings.
 
 Update over your existing release installation without uninstalling to retain destinations, overrides and history. If Android asks for installation permission, allow it, return to the app and tap Install downloaded update again. A debug build cannot accept these release-signed updates.
 
-## Changes in version 1.6
+## Changes in version 1.7
+
+Missed-call alerts now offer **Follow incoming SIM**. Identified SIM 1 calls use the saved SIM 1 SMS destination; identified SIM 2 calls use the SIM 2 destination. Missing/conflicting metadata uses your selected fallback. All alerts use the global Sending SIM preference; one active SIM follows the existing first-destination behavior. Some Phone apps omit SIM metadata, so test both routes on your device.
+
+**Remote stop & start** is optional and off until configured in Settings. Save two different ten-character printable secrets, or generate random ones. Commands are ordinary SMS to either SIM number in the source phone:
+
+```text
+SFSTOP <STOP secret>
+SFSTART <START secret>
+```
+
+Use one space after the command label and replace the placeholder with your exact secret. Letters, numbers, symbols and printable Unicode are supported; secrets are case-sensitive. The short command label is additional to the ten-character secret. RCS/chat does not trigger this receiver.
+
+STOP turns global forwarding off and discards earlier unsent SMS/call alerts. START resumes future forwarding with existing routes and sending SIM. The command receiver remains active while forwarding is off. A shared sending lock and persistent stop cutoff prevent old queue work or late failure callbacks from reviving discarded sends. An already-submitted SMS cannot be recalled.
+
+START must have a fresh SMS timestamp after the most recent applied command and arrive within ten minutes. Wait a few seconds after STOP before sending a newly composed START. Duplicate receipts and older START timestamps are rejected. Static secrets can be reused by anyone who knows them.
+
+Only salted verification hashes are stored. Once configured, command messages are withheld from app forwarding/history even when incorrect, malformed or disabled. No acknowledgement SMS is sent. Reports omit secrets and verifiers.
+
+The source phone must receive SMS and be allowed to run. Network delay, force-stop, uninstalling or revoked SMS permission can prevent remote control. Android Messages and the sending phone may retain command copies. Keep the START secret away from a destination phone that may be lost, and replace a lost destination before resuming. This controls forwarding; it is not a remote wipe.
+
+No new Android permissions are added. Existing forwarding destinations, sender overrides, Tonik and long-message settings remain intact. Test STOP, a wrong START, a fresh valid START and both call routes before relying on the feature.
+
+## Changes introduced in version 1.6
 
 - Improved credit/cash-advance and starter-pack promo filtering. Authentication, actual transaction notices and successful subscription confirmations remain protected.
 - Optional seven-day suppression of repeated non-critical branded text on the same incoming SIM and destination. Different codes and important confirmations are exempt. Existing sender overrides retain priority.
@@ -36,6 +59,7 @@ The app checks APK SHA-256, package, announced version and installed signing ide
 
 [Live update metadata](https://raw.githubusercontent.com/nGgit11/SMSForwarderPersonal-Updates/refs/heads/main/update.json)
 
+- [1.6 filtering, repeated offers and missed calls](https://github.com/nGgit11/SMSForwarderPersonal-Updates/releases/tag/v1.6)
 - [1.5 verification senders and link removal](https://github.com/nGgit11/SMSForwarderPersonal-Updates/releases/tag/v1.5)
 - [1.4.1 OTP compatibility and receipt wording](https://github.com/nGgit11/SMSForwarderPersonal-Updates/releases/tag/v1.4.1)
 - [1.4 notifications and configurable filters](https://github.com/nGgit11/SMSForwarderPersonal-Updates/releases/tag/v1.4)
