@@ -1,43 +1,45 @@
-# SMS Forwarder Personal - downloads
+# SMS Forwarder Personal downloads
 
 Application source remains private. This repository contains signed APK downloads and public update metadata only.
 
-## Current release: 1.5 (8)
+## Current release 1.6
 
-[Download version 1.5](https://github.com/nGgit11/SMSForwarderPersonal-Updates/releases/download/v1.5/app-release.apk) or open the installed app's **Settings > Check for updates**.
+[Download version 1.6](https://github.com/nGgit11/SMSForwarderPersonal-Updates/releases/download/v1.6/app-release.apk), or open the installed app's **Settings > App updates > Check for updates**. On older versions, Check for updates is directly in Settings.
 
-Update over the existing release installation without uninstalling to retain settings and history. If Android asks for installation permission, allow it, return to the app and tap **Install downloaded update** again.
+Update over your existing release installation without uninstalling to retain destinations, overrides and history. If Android asks for installation permission, allow it, return to the app and tap Install downloaded update again. A debug build cannot accept these release-signed updates.
 
-### What's new
+## Changes in version 1.6
 
-- **Important verification senders:** visible defaults AUTHMSG, TWVerify, VerifyTWL, VONAGEVFY, PIN and NOTICE; individual switches and a saved list for additional exact IDs. Existing sender overrides remain intact.
-- **Remove web links:** enabled by default for newly prepared messages. Removes domain/path/query data and adds one short **[Link on source phone]** note. Original SMS stays on the source phone. Turning the option off restores the previous defanged-link format.
-- **Local outgoing preview:** test example text and see the prepared body without sending an SMS.
-- **Sender recognition:** normalizes case, invisible formatting and width differences for exact matching. Unknown/new brands are still processed and protected by OTP/important-content detection.
-- **Reception diagnostics:** persistent broadcast counter, last-observed time and content-free parse/route events. Xiaomi/Redmi guidance points to Service SMS controls where available.
-- Recipient wording covers both Android and iPhone. Tonik compatibility and native joined options remain. Destinations, settings and history are preserved; accepted messages are not automatically resent.
+- Improved credit/cash-advance and starter-pack promo filtering. Authentication, actual transaction notices and successful subscription confirmations remain protected.
+- Optional seven-day suppression of repeated non-critical branded text on the same incoming SIM and destination. Different codes and important confirmations are exempt. Existing sender overrides retain priority.
+- HIFIN added to the visible verification-sender defaults, alongside AUTHMSG, TWVerify, VerifyTWL, VONAGEVFY, PIN and NOTICE. Defaults can be disabled and additional exact IDs added.
+- Settings separated into focused pages, with Save report at the top of Diagnostics.
+- Optional short numeric verification-code format, off by default. Read warnings and expiry on the source phone when using it.
+- Optional missed-call SMS alerts, off by default. Select a saved destination in Settings, enable alerts and grant Android notification access. Caller details depend on the Phone app, and SMS charges apply.
+- New content-free diagnostic fields for repeated messages, short-code formatting and missed-call configuration.
 
-Sender-list membership is forwarding priority, not authentication. There is no complete fixed directory of every sender a verification provider may use. AUTHMSG, TWVerify and VerifyTWL are documented by [Twilio](https://help.twilio.com/articles/19753651809947-Alphanumeric-Sender-ID-for-Verify-and-Authy); the other defaults reflect observed verification tests.
+Tonik compatibility, native joined long messages, web-link removal and existing destination settings remain available. Accepted messages are not automatically resent. Unknown/new brands still receive content-based protection and conservative forwarding. Sender-list membership is forwarding priority, not proof of identity or a complete OTP-provider directory.
 
-The Xiaomi AuthMSG capture gap still needs phone validation. A sender list cannot capture a message Android never broadcasts to the app. Check [Xiaomi Other permissions / Service SMS guidance](https://www.mi.com/global/support/faq/details/KA-497760/) where supported and verify SMS versus RCS. No new permissions or automatic inbox scanning are introduced.
+## Delivery and phone testing
 
-Link removal is supported by a user comparison where manual forwarding without a URL arrived. It is not a guarantee against all carrier/recipient filtering. Carrier reports still do not prove the receiving phone displayed or saved a message.
+The reported Lazada attempts were captured but received a negative carrier report; HIFIN received a successful carrier report while the user reported no visible message. Filtering improvements and optional formatting do not guarantee recipient display.
 
-Unit tests, debug/release lint and signed packaging passed. Android test APK compiles; no connected phone was available to execute device tests. Real recipient visibility requires phone testing.
+Check actual receipt on both Android and iPhone. Request fresh authentication messages; do not replay expired codes. For missed calls, test a new missed call after enabling the feature and access, then verify alerts stop when disabled. Hidden caller details, group-summary-only dialers and manufacturer restrictions can limit alerts. Old calls are not scanned, and no call-log permission is used.
 
-## Verification
+Android grants broad notification access, but this feature processes only Phone-app missed-call notifications. Other apps' notifications are ignored. Queued call alerts expire after one hour and are cancelled before dispatch if alerts are disabled or access is revoked.
 
-The app checks APK SHA-256, package, version and installed signing identity before opening the Android installer. Each release includes checksum metadata.
+Unit tests, debug/release lint, Android test APK compilation and signed release packaging passed. No connected phone/emulator was available to execute device tests. Real carrier acceptance and recipient visibility require phone testing.
+
+## Verification and earlier releases
+
+The app checks APK SHA-256, package, announced version and installed signing identity before opening Android's installer. Each release includes checksum metadata.
 
 [Live update metadata](https://raw.githubusercontent.com/nGgit11/SMSForwarderPersonal-Updates/refs/heads/main/update.json)
 
-## Earlier releases
-
-- [1.3 baseline](https://github.com/nGgit11/SMSForwarderPersonal-Updates/releases/tag/v1.3)
+- [1.5 verification senders and link removal](https://github.com/nGgit11/SMSForwarderPersonal-Updates/releases/tag/v1.5)
+- [1.4.1 OTP compatibility and receipt wording](https://github.com/nGgit11/SMSForwarderPersonal-Updates/releases/tag/v1.4.1)
+- [1.4 notifications and configurable filters](https://github.com/nGgit11/SMSForwarderPersonal-Updates/releases/tag/v1.4)
 - [1.3.1 OTA validation](https://github.com/nGgit11/SMSForwarderPersonal-Updates/releases/tag/v1.3.1)
-- [1.4 notifications, joined SMS and configurable filters](https://github.com/nGgit11/SMSForwarderPersonal-Updates/releases/tag/v1.4)
-- [1.4.1 OTP compatibility and carrier receipt wording](https://github.com/nGgit11/SMSForwarderPersonal-Updates/releases/tag/v1.4.1)
+- [1.3 baseline](https://github.com/nGgit11/SMSForwarderPersonal-Updates/releases/tag/v1.3)
 
-The live feed now offers 1.5. A debug build cannot accept these release-signed updates.
-
-For problems, export diagnostics promptly and note the approximate source receipt time, sender ID and actual recipient outcome. Do not share OTP values, private messages or phone numbers.
+For a problem, save a diagnostic report and note the approximate time, sender ID and actual recipient outcome. Do not share OTP values, private messages or phone numbers.
