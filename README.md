@@ -2,13 +2,28 @@
 
 Application source remains private. This repository contains signed APK downloads and public update metadata only.
 
-## Current release 1.7
+## Current release 1.8
 
-[Download version 1.7](https://github.com/nGgit11/SMSForwarderPersonal-Updates/releases/download/v1.7/app-release.apk), or open the installed app's **Settings > App updates > Check for updates**. On older versions, Check for updates is directly in Settings.
+[Download version 1.8](https://github.com/nGgit11/SMSForwarderPersonal-Updates/releases/download/v1.8/app-release.apk), or open the installed app's **Settings > App updates > Check for updates**. On older versions, Check for updates is directly in Settings.
 
 Update over your existing release installation without uninstalling to retain destinations, overrides and history. If Android asks for installation permission, allow it, return to the app and tap Install downloaded update again. A debug build cannot accept these release-signed updates.
 
-## Changes in version 1.7
+## Changes in version 1.8
+
+- Missed-call status shows listener connection, Phone notifications seen, missed notifications recognized, unique alerts saved and the latest reason. Reconnect listener and a separate missed-call log help diagnose failures without exporting caller text.
+- Capture supports Phone notifications with missing categories/timestamps and fresh single-call summaries. Old, aggregate and ongoing notifications produce skip reasons. The prior report proved connection but did not identify the rejection condition, so actual phone testing remains necessary.
+- Received voucher/reward notices are protected before promo words; invitations to earn a future voucher remain filterable.
+- New Network and SIM offers rules cover order-today, WiFi sales, load/top-up and GB/UNLI marketing. Product names alone do not block confirmed transactions. The category can be disabled, and sender overrides retain priority.
+- One Save report & diagnostics entry replaces duplicate Settings links. Diagnostics has one Save diagnostic report button beside Clear all logs, expandable sections and newest-first events. Current section headers remain reachable while scrolling.
+- Log clearing preserves core message/delivery records, pending queue work, settings and duplicate protection.
+- Messages & delivery separates Captured, Queued, Delivery and Filtered. Opening Queued or returning to it automatically rechecks eligible work, respecting global stop and uncertain-send protections.
+- Recheck & queue on a filtered message applies current rules without allowlisting its sender. Use it for the earlier Maya voucher if still within expiry; old messages are not automatically resent.
+
+After updating, clear old Phone missed-call notifications, open Missed-call alerts, request Reconnect listener and miss a fresh single call. Compare Seen, Recognized and Saved counts, then actual receipt and Messages & delivery. If it still fails, export a new report promptly; version 1.7 lacked the necessary rejection events.
+
+No new permissions are added. The database upgrade preserves records. Existing forwarding destinations, sender overrides, remote STOP/START and compatibility options remain intact.
+
+## Changes introduced in version 1.7
 
 Missed-call alerts now offer **Follow incoming SIM**. Identified SIM 1 calls use the saved SIM 1 SMS destination; identified SIM 2 calls use the SIM 2 destination. Missing/conflicting metadata uses your selected fallback. All alerts use the global Sending SIM preference; one active SIM follows the existing first-destination behavior. Some Phone apps omit SIM metadata, so test both routes on your device.
 
@@ -59,6 +74,7 @@ The app checks APK SHA-256, package, announced version and installed signing ide
 
 [Live update metadata](https://raw.githubusercontent.com/nGgit11/SMSForwarderPersonal-Updates/refs/heads/main/update.json)
 
+- [1.7 remote control and incoming-SIM call routing](https://github.com/nGgit11/SMSForwarderPersonal-Updates/releases/tag/v1.7)
 - [1.6 filtering, repeated offers and missed calls](https://github.com/nGgit11/SMSForwarderPersonal-Updates/releases/tag/v1.6)
 - [1.5 verification senders and link removal](https://github.com/nGgit11/SMSForwarderPersonal-Updates/releases/tag/v1.5)
 - [1.4.1 OTP compatibility and receipt wording](https://github.com/nGgit11/SMSForwarderPersonal-Updates/releases/tag/v1.4.1)
