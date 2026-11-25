@@ -2,11 +2,21 @@
 
 Application source remains private. This repository contains signed APK downloads and public update metadata only.
 
-## Current release 1.8
+## Current release 1.9
 
-[Download version 1.8](https://github.com/nGgit11/SMSForwarderPersonal-Updates/releases/download/v1.8/app-release.apk), or open the installed app's **Settings > App updates > Check for updates**. On older versions, Check for updates is directly in Settings.
+[Download version 1.9](https://github.com/nGgit11/SMSForwarderPersonal-Updates/releases/download/v1.9/app-release.apk), or open the installed app's **Settings > App updates > Check for updates**. On older versions, Check for updates is directly in Settings.
 
 Update over your existing release installation without uninstalling to retain destinations, overrides and history. If Android asks for installation permission, allow it, return to the app and tap Install downloaded update again. A debug build cannot accept these release-signed updates.
+
+## Changes in version 1.9
+
+- Per-SIM ringing-state tracking supplements notification metadata to route missed-call alerts to the matching saved SMS destination. The global Sending SIM preference still controls sending.
+- Unknown or conflicting incoming-SIM evidence is labeled SIM unknown and uses the selected fallback. Diagnostics show state evidence and fallback use.
+- Duplicate summary, child, enriched and reminder notifications are suppressed using retained call history. Distinct observed ringing sessions remain separate.
+- Dotted contact names are preserved in generated call alerts. Ordinary SMS web-link filtering remains enabled.
+- No new Android permissions or database migration. Update in place to keep settings and history.
+
+After updating, open Settings > Missed-call alerts and choose Reconnect listener. Clear old Phone notifications, miss one call to each source SIM and verify one alert at each matching destination. Actual SIM/OEM behavior still needs phone validation. If routing falls back, export a new report promptly.
 
 ## Changes in version 1.8
 
@@ -74,6 +84,7 @@ The app checks APK SHA-256, package, announced version and installed signing ide
 
 [Live update metadata](https://raw.githubusercontent.com/nGgit11/SMSForwarderPersonal-Updates/refs/heads/main/update.json)
 
+- [1.8 capture diagnostics and message review](https://github.com/nGgit11/SMSForwarderPersonal-Updates/releases/tag/v1.8)
 - [1.7 remote control and incoming-SIM call routing](https://github.com/nGgit11/SMSForwarderPersonal-Updates/releases/tag/v1.7)
 - [1.6 filtering, repeated offers and missed calls](https://github.com/nGgit11/SMSForwarderPersonal-Updates/releases/tag/v1.6)
 - [1.5 verification senders and link removal](https://github.com/nGgit11/SMSForwarderPersonal-Updates/releases/tag/v1.5)
